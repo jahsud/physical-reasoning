@@ -13,15 +13,16 @@ ranloc = rows[r1] + str(r2)
 # Prompt the user to choose a location for the submarine (e.g., B3)
 newGrid = np.copy(grid)
 print(newGrid, '\n')
-guess = input("Choose a location for the submarine: \n")
+guess = input("Choose a location for the submarine: ")
 
 # Tell the user if their guess is correct and how much information was gained with that guess and how much total information they have gained so far (summed over all guesses)
 while (guess != ranloc):
-    newGrid[rows.index(guess[0]),int(guess[1])] = "X"
+    newGrid[rows.index(guess[0]),(int(guess[1])-1)] = "X"
     print(newGrid, "\n")
     chances = np.count_nonzero(newGrid == '?')
     h = np.log2((chances + 1) / chances)
-    guess = input("Your guess %s is NOT correct! \nH = %.2f \nChoose a new location: " % (guess, h))
+    guess = input("Your guess %s is NOT correct! \nH = %.4f \n\nChoose a new location: " % (guess, h))
 newGrid[r1,r2] = "S"
-print("Your guess %s is correct! \nH = %.2f" % (guess, h))
+print(newGrid)
+print("Your guess %s is correct! \nH = %.4f" % (guess, h))
 
